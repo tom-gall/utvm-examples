@@ -44,7 +44,7 @@ logging.basicConfig(level=logging.DEBUG)
 TARGET = tvm.target.target.micro("stm32f746xx")
 
 with tvm.transform.PassContext(
-    opt_level=3, config={"tir.disable_vectorize": True}, disabled_pass=["FuseOps"]
+    opt_level=3, config={"tir.disable_vectorize": True},
 ):
     graph, c_mod, c_params = relay.build(mod, target=TARGET, params=params)
 
