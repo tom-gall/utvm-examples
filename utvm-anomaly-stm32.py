@@ -82,8 +82,7 @@ micro_binary = tvm.micro.build_static_runtime(
     workspace,
     compiler,
     c_mod,
-    lib_opts=opts["bin_opts"],
-    bin_opts=opts["bin_opts"],
+    opts,
     #extra_libs=[os.path.join(tvm.micro.build.CRT_ROOT_DIR, "memory")],
 )
 
