@@ -66,8 +66,6 @@ if not repo_root:
 	exit()
 project_dir = f"{repo_root}/apps/microtvm/zephyr/demo_runtime"
 
-compiler = tvm.micro.DefaultCompiler(target=TARGET)
-
 compiler = zephyr.ZephyrCompiler(project_dir=project_dir,
         board="stm32f746g_disco",
         zephyr_toolchain_variant="zephyr",
@@ -75,8 +73,6 @@ compiler = zephyr.ZephyrCompiler(project_dir=project_dir,
 opts = tvm.micro.default_options(f"{project_dir}/crt")
 #opts["bin_opts"]["ccflags"] = ["-std=gnu++14"]
 #opts["lib_opts"]["ccflags"] = ["-std=gnu++14"]
-
-
 
 micro_binary = tvm.micro.build_static_runtime(
     # the x86 compiler *expects* you to give the exact same dictionary for both
