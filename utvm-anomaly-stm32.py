@@ -50,9 +50,21 @@ with tvm.transform.PassContext(
 
 workspace = tvm.micro.Workspace(debug=True)
 
-
+# 'project_dir' set from hardcoded path
 # github : https://github.com/tom-gall/zephyr-runtime.git
-project_dir = os.path.join("/home/tgall/tvm/", "zephyr-runtime")
+# project_dir = os.path.join("/home/tgall/tvm/", "zephyr-runtime")
+
+# 'project_dir' based upon relative Git repo
+# git_cmd = ["git", "rev-parse", "--show-toplevel"]
+# repo_root = subprocess.check_output(git_cmd, encoding="utf-8").strip()
+# project_dir = f"{repo_root}/apps/microtvm/zephyr/demo_runtime"
+
+# 'project_dir' based upon TVM_HOME env variable
+repo_root = os.environ.get("TVM_HOME")
+if not repo_root:
+	print(f'ERROR: Please set env variable TVM_HOME correctly')
+	exit()
+project_dir = f"{repo_root}/apps/microtvm/zephyr/demo_runtime"
 
 compiler = tvm.micro.DefaultCompiler(target=TARGET)
 
